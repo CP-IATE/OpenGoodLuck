@@ -1,13 +1,9 @@
-#ifndef ENGINE_H
-#define ENGINE_H
-
+#pragma once
 struct GLFWwindow;
 
-class Engine 
+class Engine
 {
 public:
 	int run();
 	void processInput(GLFWwindow* window);
 };
-
-#endif // ENGINE_H

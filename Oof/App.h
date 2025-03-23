@@ -1,7 +1,4 @@
-#ifndef APP_H
-#define APP_H
-
-
+#pragma once
 class App 
 {
 public:
@@ -12,5 +9,3 @@ public:
 	int run();
 };
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
-#endif // APP_H

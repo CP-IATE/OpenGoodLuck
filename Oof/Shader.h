@@ -1,9 +1,8 @@
-#ifndef SHADER_H
-#define SHADER_H
+#pragma once
 #include <string>
 
 
-class Shader 
+class Shader
 {
 public:
 	unsigned int shaderProgram, VAO, VBO;
@@ -12,6 +11,3 @@ public:
 private:
 	std::string readShaderFile(const char* filename);
 };
-
-#endif // SHADER_H
-

@@ -11,7 +11,7 @@ int Engine::run() {
     if (app.run() == -1) {
         return -1;
     };
-    Shader shader("shaders/vertex.glsl", "shaders/fragment.glsl");
+    Shader shader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
 
     while (!glfwWindowShouldClose(app.window))
     {
