@@ -5,10 +5,14 @@ class Shader
 {
 public:
 	unsigned int shaderProgram;
-	unsigned int VAO;
-	unsigned int VBO;
 
 	Shader(const char* vertexShaderPath, const char* fragmentShaderPath);
+	void use();
+	void setBool(const std::string& name, bool value) const;
+	void setInt(const std::string& name, int value) const;
+	void setFloat(const std::string& name, float value) const;
+	~Shader();
 private:
 	std::string readShaderFile(const char* filename);
+	void checkCompileErrors(unsigned int shader, std::string type);
 };

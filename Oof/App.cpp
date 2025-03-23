@@ -35,6 +35,8 @@ int App::run() {
     glViewport(0, 0, width, height);
 
     glfwSetFramebufferSizeCallback(this->window, framebuffer_size_callback);
+
+    return 0;
 }
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
