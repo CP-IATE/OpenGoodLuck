@@ -5,13 +5,15 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+const int WINDOW_WIDTH = 1280;
+const int WINDOW_HEIGHT = 720;
 
 int Engine::run() {
-	App app(800, 600, "LGBT triangle");
+	App app(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_DISPLAY_NAME);
     if (app.run() == -1) {
         return -1;
     };
-    Shader shader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+    Shader shader(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
 
     while (!glfwWindowShouldClose(app.window))
     {

@@ -3,7 +3,6 @@
 #include <iostream>
 #include "App.h"
 
-
 App::App(int width, int height, const char* title) {
     this->width = width;
     this->height = height;
@@ -33,7 +32,7 @@ int App::run() {
         return -1;
     }
 
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, width, height);
 
     glfwSetFramebufferSizeCallback(this->window, framebuffer_size_callback);
 }

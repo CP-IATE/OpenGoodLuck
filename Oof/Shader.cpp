@@ -5,7 +5,6 @@
 #include <sstream>
 #include "Shader.h"
 
-
 Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath) {
     std::string vertexShaderSourcestr = readShaderFile(vertexShaderPath);
     std::string fragmentShaderSourcestr = readShaderFile(fragmentShaderPath);
