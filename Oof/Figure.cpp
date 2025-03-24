@@ -2,25 +2,30 @@
 #include <glad/glad.h>
 #include <iostream>
 
-Figure::Figure(float* vertices, size_t vertices_count) {
+Figure::Figure(float* vertices, size_t vertices_count, float* colors, size_t colors_count) {
 	vertices_ = vertices;
 	vertices_count_ = vertices_count;
+    colors_ = colors;
+    colors_count_ = colors_count;
     VAO = NULL;
-    VBO = NULL;
+    VBO[0] = NULL;
+    VBO[1] = NULL;
     pShader_ = nullptr;
 }
 
 void Figure::setupVertexObjects() {
-    glGenBuffers(1, &VBO);
+    glGenBuffers(2, VBO);
     glGenVertexArrays(1, &VAO);
-
     glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count_, vertices_, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertices_count_, vertices_, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * colors_count_, colors_, GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(1);
 }
 
@@ -38,5 +43,5 @@ void Figure::setShader(Shader* shader) {
 
 Figure::~Figure() {
     glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(2, VBO);
 }
