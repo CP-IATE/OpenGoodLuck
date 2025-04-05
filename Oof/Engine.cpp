@@ -10,16 +10,25 @@ const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
 float vertices[] = {
     0.5f, -0.5f, 0.0f,
+    0.0f, -0.5f, 0.0f,
     -0.5f, -0.5f, 0.0f,
-    0.0f,  0.5f, 0.0f
+    -0.25f, 0.0f, 0.0f,
+    0.0f, 0.5f, 0.0f,
+    0.25f, 0.0f, 0.0f,
 };
 float colors[] = {
     1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, 0.0f,
     0.0f, 1.0f, 0.0f,
-    0.0f, 0.0f, 1.0f
+    0.0f, 0.5f, 0.5f,
+    0.0f, 0.0f, 1.0f,
+    0.5f, 0.0f, 0.5f
 };
-float indices[] = {
-    0, 1, 2
+GLuint indices[] = {
+    0, 1, 5,
+    1, 2, 3,
+    3, 4, 5,
+    1, 3, 5
 };
 
 int Engine::run() {
@@ -29,7 +38,7 @@ int Engine::run() {
     };
 
     Shader shader(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
-    Figure figure(vertices, 9, indices, 3, colors, 9);
+    Figure figure(vertices, 18, indices, 12, colors, 18);
     figure.setShader(&shader);
     figure.setupVertexObjects();
 

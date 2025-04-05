@@ -2,17 +2,17 @@
 #include <glad/glad.h>
 #include <iostream>
 
-Figure::Figure(float* vertices, size_t vertices_count, float* indices, size_t indices_count, float* colors, size_t colors_count) {
+Figure::Figure(float* vertices, size_t vertices_count, GLuint* indices, GLsizei indices_count, float* colors, size_t colors_count) {
 	vertices_ = vertices;
 	vertices_count_ = vertices_count;
     indices_ = indices;
     indices_count_ = indices_count;
     colors_ = colors;
     colors_count_ = colors_count;
-    VAO = NULL;
-    VBO[0] = NULL;
-    VBO[1] = NULL;
-    EBO = NULL;
+    VAO = 0;
+    VBO[0] = 0;
+    VBO[1] = 0;
+    EBO = 0;
     pShader_ = nullptr;
 }
 
@@ -31,7 +31,7 @@ void Figure::setupVertexObjects() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indices_count_, indices_, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * colors_count_, colors_, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * colors_count_, colors_, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(1);
 }
@@ -41,7 +41,7 @@ void Figure::draw() {
     glClear(GL_COLOR_BUFFER_BIT);
     pShader_->use();
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, indices_count_, GL_UNSIGNED_INT, 0);
 }
 
 void Figure::setShader(Shader* shader) {

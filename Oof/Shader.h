@@ -1,4 +1,5 @@
 #pragma once
+#include <glad/glad.h>
 #include <string>
 
 class Shader
@@ -14,5 +15,5 @@ public:
 	~Shader();
 private:
 	std::string readShaderFile(const char* filename);
-	void checkCompileErrors(unsigned int shader, std::string type);
+	void checkCompileErrors(GLuint shader, std::string type);
 };

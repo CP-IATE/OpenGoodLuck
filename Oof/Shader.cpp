@@ -1,5 +1,3 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -69,7 +67,7 @@ std::string Shader::readShaderFile(const char* filename)
     return ss.str();
 }
 
-void Shader::checkCompileErrors(unsigned int shader, std::string type)
+void Shader::checkCompileErrors(GLuint shader, std::string type)
 {
     int success;
     char infoLog[1024];
