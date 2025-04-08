@@ -2,7 +2,7 @@
 
 Just a project to learn about OpenGL.
 
-Currently displays a window with multi-color triangle from [OpenGL tutorial](https://learnopengl.com/Getting-started/Shaders), with shaders written in separate files and code being refactored to OOP-style.
+Currently displays a window, with figure that consists piramid on top of cube. This figure is drawn in perspective using all chapters of [OpenGL tutorial](https://learnopengl.com/Getting-started/Review) up to Review, with shaders written in separate files and code refactored to OOP-style.
 
 ## Installation
 
@@ -10,7 +10,7 @@ Currently displays a window with multi-color triangle from [OpenGL tutorial](htt
 
 ```git clone https://github.com/CP-IATE/OpenGoodLuck```
 
-2. Download and compile [GLFW](https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zip), link it in your project
+2. Download and compile [GLFW](https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zip), link it in your project. Also download [GLM root dir](https://github.com/g-truc/glm/tree/master/glm) and link it similarly 
 
 ## Build and Run
 

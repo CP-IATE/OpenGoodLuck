@@ -9,26 +9,32 @@
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
 float vertices[] = {
-    0.5f, -0.5f, 0.0f,
-    0.0f, -0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-    -0.25f, 0.0f, 0.0f,
-    0.0f, 0.5f, 0.0f,
-    0.25f, 0.0f, 0.0f,
+    -0.25f, -0.5f, 0.25f,
+    -0.25f, -0.5f, -0.25f,
+    0.25f, -0.5f, -0.25f,
+    0.25f, -0.5f, 0.25f,
+    -0.25f, 0.0f, 0.25f,
+    -0.25f, 0.0f, -0.25f,
+    0.25f, 0.0f, -0.25f,
+    0.25f, 0.0f, 0.25f,
+    0.0f, 0.4f, 0.0f
 };
 float colors[] = {
-    1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, 0.0f,
-    0.0f, 1.0f, 0.0f,
-    0.0f, 0.5f, 0.5f,
-    0.0f, 0.0f, 1.0f,
-    0.5f, 0.0f, 0.5f
+    0.0745098f, 0.0745098f, 0.333333f,
+    0.0745098f, 0.0745098f, 0.333333f,
+    0.0745098f, 0.0745098f, 0.333333f,
+    0.0745098f, 0.0745098f, 0.333333f,
+    0.0745098f, 0.0745098f, 0.333333f,
+    0.0745098f, 0.0745098f, 0.333333f,
+    0.0745098f, 0.0745098f, 0.333333f,
+    0.0745098f, 0.0745098f, 0.333333f,
+    0.0745098f, 0.0745098f, 0.333333f
 };
 GLuint indices[] = {
-    0, 1, 5,
-    1, 2, 3,
-    3, 4, 5,
-    1, 3, 5
+    0, 1, 1, 2, 2, 3, 3, 0,
+    0, 4, 4, 7, 7, 3, 7, 6,
+    6, 2, 6, 5, 5, 1, 5, 4,
+    8, 4, 8, 5, 8, 6, 8, 7
 };
 
 int Engine::run() {
@@ -38,7 +44,7 @@ int Engine::run() {
     };
 
     Shader shader(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
-    Figure figure(vertices, 18, indices, 12, colors, 18);
+    Figure figure(vertices, 27, indices, 32, colors, 27);
     figure.setShader(&shader);
     figure.setupVertexObjects();
 
@@ -48,7 +54,7 @@ int Engine::run() {
         processInput(app.window);
 
         // rendering commands here
-        figure.draw();
+        figure.draw(WINDOW_WIDTH, WINDOW_HEIGHT);
 
         // check and call events and swap the buffers
         glfwPollEvents();
