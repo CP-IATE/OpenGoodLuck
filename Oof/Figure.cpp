@@ -50,6 +50,7 @@ void Figure::draw(int SCR_WIDTH, int SCR_HEIGHT) {
     glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
+    model = glm::rotate(model, (float)glfwGetTime() * 3.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     view = glm::lookAt(
         glm::vec3(0.5f, 0.5f, 2.0f),  // Camera position
         glm::vec3(0.0f, 0.0f, 0.0f),  // Look at the origin

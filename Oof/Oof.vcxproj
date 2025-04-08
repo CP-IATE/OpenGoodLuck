@@ -135,6 +135,7 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Figure.h" />
+    <ClInclude Include="miniaudio.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -143,7 +144,14 @@
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="miniaudio.c" />
     <ClCompile Include="Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="funkytown.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

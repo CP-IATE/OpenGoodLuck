@@ -5,6 +5,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include "miniaudio.h"
+
+#define AUDIO_FILE "funkytown.wav"
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -48,6 +51,20 @@ int Engine::run() {
     figure.setShader(&shader);
     figure.setupVertexObjects();
 
+    ma_result result;
+    ma_engine engine;
+
+    result = ma_engine_init(NULL, &engine);
+    if (result != MA_SUCCESS) {
+        std::cout << "ERROR::SOUND::ENGINE::INITIALIZATION_FAILED\n";
+    }
+    else {
+        result = ma_engine_play_sound(&engine, AUDIO_FILE, NULL);
+        if (result != MA_SUCCESS) {
+            std::cout << "ERROR::SOUND::ENGINE::UNKNOWN_ERROR\n";
+        }
+    }
+
     while (!glfwWindowShouldClose(app.window))
     {
         // input
@@ -61,6 +78,7 @@ int Engine::run() {
         glfwSwapBuffers(app.window);
     }
 
+    ma_engine_uninit(&engine);
     glfwTerminate();
     return 0;
 }
