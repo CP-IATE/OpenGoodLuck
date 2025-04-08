@@ -2,7 +2,11 @@
 
 Just a project to learn about OpenGL.
 
-Currently displays a window, with figure that consists piramid on top of cube. This figure is drawn in perspective using all chapters of [OpenGL tutorial](https://learnopengl.com/Getting-started/Review) up to Review, with shaders written in separate files and code refactored to OOP-style. It also spins with funny music on background
+Currently displays a window, with figure that consisting of piramid on top of cube. 
+
+![Figure](figure.jpg)
+
+This figure is drawn in perspective using all the chapters of [OpenGL tutorial](https://learnopengl.com/Getting-started/Review) up to 'Review', with shaders written in separate files and code refactored to an OOP style. It also spins with funny music in the background
 
 ## Installation
 
