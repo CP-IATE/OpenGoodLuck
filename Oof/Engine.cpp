@@ -7,7 +7,7 @@
 #include <iostream>
 #include "miniaudio.h"
 
-#define AUDIO_FILE "funkytown.wav"
+#define AUDIO_FILE "funkytown.mp3"
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
@@ -53,17 +53,21 @@ int Engine::run() {
 
     ma_result result;
     ma_engine engine;
+    ma_sound sound;
 
     result = ma_engine_init(NULL, &engine);
     if (result != MA_SUCCESS) {
-        std::cout << "ERROR::SOUND::ENGINE::INITIALIZATION_FAILED\n";
+        std::cout << "ERROR::SOUND::ENGINE::INITIALIZATION_FAILED\nERROR CODE: " << result << std::endl;
+        return -1;
     }
-    else {
-        result = ma_engine_play_sound(&engine, AUDIO_FILE, NULL);
-        if (result != MA_SUCCESS) {
-            std::cout << "ERROR::SOUND::ENGINE::UNKNOWN_ERROR\n";
-        }
+
+    result = ma_sound_init_from_file(&engine, AUDIO_FILE, 0, NULL, NULL, &sound);
+    if (result != MA_SUCCESS) {
+        std::cout << "ERROR::SOUND::FILE::INITIALIZATION_FAILED\nERROR CODE: " << result << std::endl;
+        return -1;
     }
+
+    ma_sound_start(&sound);    
 
     while (!glfwWindowShouldClose(app.window))
     {
@@ -78,6 +82,7 @@ int Engine::run() {
         glfwSwapBuffers(app.window);
     }
 
+    ma_sound_uninit(&sound);
     ma_engine_uninit(&engine);
     glfwTerminate();
     return 0;

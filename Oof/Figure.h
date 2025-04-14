@@ -16,7 +16,8 @@ private:
 	float* vertices_;
 	GLuint* indices_;
 	float* colors_;
-	size_t vertices_count_, indices_count_, colors_count_;
+	size_t vertices_count_, colors_count_;
+	GLsizei indices_count_;
 	Shader* pShader_;
 };
 

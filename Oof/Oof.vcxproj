@@ -148,7 +148,7 @@
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="funkytown.wav" />
+    <Media Include="funkytown.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
