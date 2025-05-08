@@ -45,12 +45,10 @@ int App::run() {
 
     glViewport(0, 0, width, height);
 
-    framebuffer_size_callback(width, height);
-
     return 0;
 }
 
-static void framebuffer_size_callback(int width, int height)
+void framebuffer_size_callback(int width, int height)
 {
     glViewport(0, 0, width, height);
 } 

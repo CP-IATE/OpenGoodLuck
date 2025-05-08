@@ -9,4 +9,4 @@ public:
 	App(int width, int height, const char* title);
 	int run();
 };
-static void framebuffer_size_callback(int width, int height);
+void framebuffer_size_callback(int width, int height);
