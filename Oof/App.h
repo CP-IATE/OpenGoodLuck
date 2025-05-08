@@ -1,11 +1,12 @@
+#include <SDL3/SDL.h>
 #pragma once
 class App 
 {
 public:
 	int width, height;
 	const char* title;
-	GLFWwindow* window;
+	SDL_Window* window;
 	App(int width, int height, const char* title);
 	int run();
 };
-static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+static void framebuffer_size_callback(int width, int height);

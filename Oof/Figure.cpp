@@ -1,6 +1,6 @@
 #include "Figure.h"
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <SDL3/SDL.h>
 #include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -33,10 +33,10 @@ void Figure::setupVertexObjects() {
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * indices_count_, indices_, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * indices_count_, indices_, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * colors_count_, colors_, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * colors_count_, colors_, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(1);
 }
@@ -50,7 +50,8 @@ void Figure::draw(int SCR_WIDTH, int SCR_HEIGHT) {
     glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    model = glm::rotate(model, (float)glfwGetTime() * 3.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    float time = SDL_GetTicks() / 1000.0f;
+    model = glm::rotate(model, time * 3.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     view = glm::lookAt(
         glm::vec3(0.5f, 0.5f, 2.0f),  // Camera position
         glm::vec3(0.0f, 0.0f, 0.0f),  // Look at the origin

@@ -5,7 +5,6 @@ class Engine
 {
 public:
 	int run();
-	void processInput(GLFWwindow* window);
 
 private:
     static constexpr const char* VERTEX_SHADER_PATH = "./shaders/vertex.glsl";

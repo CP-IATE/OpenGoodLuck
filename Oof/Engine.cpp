@@ -3,7 +3,7 @@
 #include "Shader.h"
 #include "Figure.h"
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <SDL3/SDL.h>
 #include <iostream>
 #include "miniaudio.h"
 
@@ -67,29 +67,35 @@ int Engine::run() {
         return -1;
     }
 
-    ma_sound_start(&sound);    
+    ma_sound_start(&sound);   
 
-    while (!glfwWindowShouldClose(app.window))
-    {
-        // input
-        processInput(app.window);
+    SDL_Event event;
+    bool running = true;
 
-        // rendering commands here
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            switch (event.type) {
+            case SDL_EVENT_QUIT:
+                running = false;
+                break;
+
+            case SDL_EVENT_WINDOW_RESIZED:
+                framebuffer_size_callback(event.window.data1, event.window.data2);
+                break;
+
+            case SDL_EVENT_KEY_DOWN:
+                if (event.key.key == SDLK_ESCAPE)
+                    running = false;
+                break;
+            }
+        }
+
         figure.draw(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-        // check and call events and swap the buffers
-        glfwPollEvents();
-        glfwSwapBuffers(app.window);
+        SDL_GL_SwapWindow(app.window);
     }
 
     ma_sound_uninit(&sound);
     ma_engine_uninit(&engine);
-    glfwTerminate();
+    SDL_Quit();
     return 0;
-}
-
-void Engine::processInput(GLFWwindow* window)
-{
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
 }
