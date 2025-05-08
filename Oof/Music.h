@@ -14,4 +14,5 @@ private:
 	ma_result result;
 	ma_engine engine;
 	ma_sound sound;
+	bool initialized;
 };
