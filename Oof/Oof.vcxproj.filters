@@ -29,6 +29,9 @@
     <ClInclude Include="miniaudio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Music.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -52,11 +55,12 @@
     <ClCompile Include="miniaudio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Music.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="funkytown.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
+    <Media Include="funkytown.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

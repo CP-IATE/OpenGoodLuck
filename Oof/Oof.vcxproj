@@ -140,6 +140,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="miniaudio.h" />
+    <ClInclude Include="Music.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +150,7 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="miniaudio.c" />
+    <ClCompile Include="Music.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>

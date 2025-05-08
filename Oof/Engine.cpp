@@ -6,6 +6,7 @@
 #include <SDL3/SDL.h>
 #include <iostream>
 #include "miniaudio.h"
+#include "Music.h"
 
 #define AUDIO_FILE "funkytown.mp3"
 
@@ -51,23 +52,9 @@ int Engine::run() {
     figure.setShader(&shader);
     figure.setupVertexObjects();
 
-    ma_result result;
-    ma_engine engine;
-    ma_sound sound;
-
-    result = ma_engine_init(NULL, &engine);
-    if (result != MA_SUCCESS) {
-        std::cout << "ERROR::SOUND::ENGINE::INITIALIZATION_FAILED\nERROR CODE: " << result << std::endl;
-        return -1;
-    }
-
-    result = ma_sound_init_from_file(&engine, AUDIO_FILE, 0, NULL, NULL, &sound);
-    if (result != MA_SUCCESS) {
-        std::cout << "ERROR::SOUND::FILE::INITIALIZATION_FAILED\nERROR CODE: " << result << std::endl;
-        return -1;
-    }
-
-    ma_sound_start(&sound);   
+    Music music(AUDIO_FILE);
+    music.start();
+ 
 
     SDL_Event event;
     bool running = true;
@@ -94,8 +81,7 @@ int Engine::run() {
         SDL_GL_SwapWindow(app.window);
     }
 
-    ma_sound_uninit(&sound);
-    ma_engine_uninit(&engine);
+    music.end();
     SDL_Quit();
     return 0;
 }
