@@ -54,34 +54,39 @@ int Engine::run() {
 
     Music music(AUDIO_FILE);
     music.start();
- 
-
-    SDL_Event event;
+    
     bool running = true;
 
     while (running) {
-        while (SDL_PollEvent(&event)) {
-            switch (event.type) {
-            case SDL_EVENT_QUIT:
-                running = false;
-                break;
-
-            case SDL_EVENT_WINDOW_RESIZED:
-                framebuffer_size_callback(event.window.data1, event.window.data2);
-                break;
-
-            case SDL_EVENT_KEY_DOWN:
-                if (event.key.key == SDLK_ESCAPE)
-                    running = false;
-                break;
-            }
-        }
-
-        figure.draw(WINDOW_WIDTH, WINDOW_HEIGHT);
+        PollEvents(running);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        figure.update(WINDOW_WIDTH, WINDOW_HEIGHT);
+        figure.draw();
         SDL_GL_SwapWindow(app.window);
     }
 
     music.end();
     SDL_Quit();
     return 0;
+}
+
+void Engine::PollEvents(bool& running) {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+        case SDL_EVENT_QUIT:
+            running = false;
+            break;
+
+        case SDL_EVENT_WINDOW_RESIZED:
+            framebuffer_size_callback(event.window.data1, event.window.data2);
+            break;
+
+        case SDL_EVENT_KEY_DOWN:
+            if (event.key.key == SDLK_ESCAPE)
+                running = false;
+            break;
+        }
+    }
 }

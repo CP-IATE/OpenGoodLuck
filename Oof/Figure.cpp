@@ -41,16 +41,12 @@ void Figure::setupVertexObjects() {
     glEnableVertexAttribArray(1);
 }
 
-void Figure::draw(int SCR_WIDTH, int SCR_HEIGHT) {
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glLineWidth(3.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    pShader_->use();
-    // create transformations
+void Figure::update(int SCR_WIDTH, int SCR_HEIGHT) {
     glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
     float time = SDL_GetTicks() / 1000.0f;
+
     model = glm::rotate(model, time * 3.0f, glm::vec3(0.0f, 1.0f, 0.0f));
     view = glm::lookAt(
         glm::vec3(0.5f, 0.5f, 2.0f),  // Camera position
@@ -58,6 +54,7 @@ void Figure::draw(int SCR_WIDTH, int SCR_HEIGHT) {
         glm::vec3(0.0f, 1.0f, 0.0f)   // Up vector (Y-axis)
     );
     projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    pShader_->use();
     // retrieve the matrix uniform locations
     unsigned int modelLoc = glGetUniformLocation(pShader_->shaderProgram, "model");
     unsigned int viewLoc = glGetUniformLocation(pShader_->shaderProgram, "view");
@@ -66,7 +63,10 @@ void Figure::draw(int SCR_WIDTH, int SCR_HEIGHT) {
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
     // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
     pShader_->setMat4("projection", projection);
+}
 
+void Figure::draw() {
+    glLineWidth(3.0f);
     glBindVertexArray(VAO);
     glDrawElements(GL_LINES, indices_count_, GL_UNSIGNED_INT, 0);
 }

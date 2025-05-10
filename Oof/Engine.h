@@ -5,6 +5,7 @@ class Engine
 {
 public:
 	int run();
+    void PollEvents(bool& running);
 
 private:
     static constexpr const char* VERTEX_SHADER_PATH = "./shaders/vertex.glsl";
