@@ -6,7 +6,7 @@ Currently displays a window, with figure that consisting of piramid on top of cu
 
 ![Figure](figure.jpg)
 
-This figure is drawn in perspective using all the chapters of [OpenGL tutorial](https://learnopengl.com/Getting-started/Review) up to 'Review', with shaders written in separate files and code refactored to an OOP style. It also spins with funny music in the background
+This figure is drawn in perspective using all the chapters of [OpenGL tutorial](https://learnopengl.com/Getting-started/Review) up to 'Model', with shaders written in separate files and code refactored to an OOP style. Figure is being read from object file. It also spins with funny music in the background
 
 ## Installation
 
@@ -14,7 +14,7 @@ This figure is drawn in perspective using all the chapters of [OpenGL tutorial](
 
 ```git clone https://github.com/CP-IATE/OpenGoodLuck```
 
-2. Download and compile [GLFW](https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zip), link it in your project. Also download [GLM root dir](https://github.com/g-truc/glm/tree/master/glm) and link it similarly 
+2. Install [SDL3](https://github.com/libsdl-org/SDL/blob/main/INSTALL.md), in your project using guide. Download [GLM root dir](https://github.com/g-truc/glm/tree/master/glm) and link it to the project. Download and compile [assimp](https://github.com/assimp/assimp/blob/master/Build.md) as dll an place it in project root 
 
 ## Build and Run
 

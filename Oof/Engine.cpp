@@ -1,45 +1,17 @@
 #include "Engine.h"
 #include "App.h"
 #include "Shader.h"
-#include "Figure.h"
 #include <glad/glad.h>
 #include <SDL3/SDL.h>
 #include <iostream>
 #include "miniaudio.h"
 #include "Music.h"
-
-#define AUDIO_FILE "funkytown.mp3"
+#include "Model.h"
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
 
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
-float vertices[] = {
-    -0.25f, -0.5f, 0.25f,
-    -0.25f, -0.5f, -0.25f,
-    0.25f, -0.5f, -0.25f,
-    0.25f, -0.5f, 0.25f,
-    -0.25f, 0.0f, 0.25f,
-    -0.25f, 0.0f, -0.25f,
-    0.25f, 0.0f, -0.25f,
-    0.25f, 0.0f, 0.25f,
-    0.0f, 0.4f, 0.0f
-};
-float colors[] = {
-    0.0745098f, 0.0745098f, 0.333333f,
-    0.0745098f, 0.0745098f, 0.333333f,
-    0.0745098f, 0.0745098f, 0.333333f,
-    0.0745098f, 0.0745098f, 0.333333f,
-    0.0745098f, 0.0745098f, 0.333333f,
-    0.0745098f, 0.0745098f, 0.333333f,
-    0.0745098f, 0.0745098f, 0.333333f,
-    0.0745098f, 0.0745098f, 0.333333f,
-    0.0745098f, 0.0745098f, 0.333333f
-};
-GLuint indices[] = {
-    0, 1, 1, 2, 2, 3, 3, 0,
-    0, 4, 4, 7, 7, 3, 7, 6,
-    6, 2, 6, 5, 5, 1, 5, 4,
-    8, 4, 8, 5, 8, 6, 8, 7
-};
 
 int Engine::run() {
 	App app(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_DISPLAY_NAME);
@@ -48,10 +20,7 @@ int Engine::run() {
     };
 
     Shader shader(VERTEX_SHADER_PATH, FRAGMENT_SHADER_PATH);
-    Figure figure(vertices, 27, indices, 32, colors, 27);
-    figure.setShader(&shader);
-    figure.setupVertexObjects();
-
+    Model model(PEAK_MODEL);
     Music music(AUDIO_FILE);
     music.start();
     
@@ -61,8 +30,8 @@ int Engine::run() {
         PollEvents(running);
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        figure.update(WINDOW_WIDTH, WINDOW_HEIGHT);
-        figure.draw();
+        rotateView(shader);
+        model.Draw(shader);
         SDL_GL_SwapWindow(app.window);
     }
 
@@ -89,4 +58,23 @@ void Engine::PollEvents(bool& running) {
             break;
         }
     }
+}
+
+void rotateView(Shader& shader) {
+    glm::mat4 modelMat = glm::mat4(1.0f);
+    float time = SDL_GetTicks() / 1000.0f;
+    modelMat = glm::rotate(modelMat, time * 3.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+
+    glm::mat4 view = glm::lookAt(
+        glm::vec3(0.5f, 0.5f, 2.0f),
+        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(0.0f, 1.0f, 0.0f)
+    );
+
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)WINDOW_WIDTH / WINDOW_HEIGHT, 0.1f, 100.0f);
+
+    shader.use();
+    shader.setMat4("model", modelMat);
+    shader.setMat4("view", view);
+    shader.setMat4("projection", projection);
 }

@@ -3,10 +3,10 @@
 #include <sstream>
 #include "Shader.h"
 
-Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath) {
+Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometryShaderPath) {
     std::string vertexShaderSourcestr = readShaderFile(vertexShaderPath);
     std::string fragmentShaderSourcestr = readShaderFile(fragmentShaderPath);
-
+    
     const char* vertexShaderSource = vertexShaderSourcestr.c_str();
     const char* fragmentShaderSource = fragmentShaderSourcestr.c_str();
 
@@ -22,20 +22,34 @@ Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath) {
     glCompileShader(fragmentShader);
     checkCompileErrors(fragmentShader, "FRAGMENT");
 
+    unsigned int geometryShader;
+    if (geometryShaderPath != nullptr) {
+        std::string geometryShaderSourcestr = readShaderFile(geometryShaderPath);
+        const char* geometryShaderSource = geometryShaderSourcestr.c_str();
+        geometryShader = glCreateShader(GL_GEOMETRY_SHADER);
+        glCompileShader(geometryShader);
+        checkCompileErrors(geometryShader, "GEOMETRY");
+    }
+
     shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
+    if (geometryShaderPath != nullptr)
+        glAttachShader(shaderProgram, geometryShader);
     glLinkProgram(shaderProgram);
     checkCompileErrors(shaderProgram, "PROGRAM");
 
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
+    if (geometryShaderPath != nullptr)
+        glDeleteShader(geometryShader);
 }
 
 void Shader::use() const
 {
     glUseProgram(shaderProgram);
 }
+
 
 
 void Shader::setBool(const std::string& name, bool value) const

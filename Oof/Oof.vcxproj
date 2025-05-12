@@ -85,7 +85,18 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);;assimp-vc143-mtd.lib</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /E /Y /I "$(ProjectDir)models" "$(OutDir)models"
+
+xcopy /E /Y /I "$(ProjectDir)textures" "$(OutDir)textures"
+
+xcopy /E /Y /I "$(ProjectDir)shaders" "$(OutDir)shaders"
+xcopy /Y "$(ProjectDir)funkytown.mp3" "$(OutDir)"
+xcopy /Y "$(ProjectDir)assimp-vc143-mtd.dll" "$(OutDir)"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,8 +126,18 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib;opengl32.lib;assimp-vc143-mtd.lib</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /E /Y /I "$(ProjectDir)models" "$(OutDir)models"
+
+xcopy /E /Y /I "$(ProjectDir)textures" "$(OutDir)textures"
+
+xcopy /E /Y /I "$(ProjectDir)shaders" "$(OutDir)shaders"
+xcopy /Y "$(ProjectDir)funkytown.mp3" "$(OutDir)"
+xcopy /Y "$(ProjectDir)assimp-vc143-mtd.dll" "$(OutDir)"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -138,26 +159,32 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="Figure.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="miniaudio.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Music.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="Figure.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="miniaudio.c" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="stb_image.c" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="funkytown.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+    <None Include="shaders\fragment.glsl" />
+    <None Include="shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\figure.jpg" />
@@ -166,6 +193,9 @@
     <ProjectReference Include="..\..\..\..\Downloads\SDL-release-3.2.12\SDL-release-3.2.12\VisualC\SDL\SDL.vcxproj">
       <Project>{81ce8daf-ebb2-4761-8e45-b71abcca8c68}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="models\cubey.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
