@@ -12,7 +12,7 @@ private:
     static constexpr const char* FRAGMENT_SHADER_PATH = "./shaders/fragment.glsl";
     static constexpr const char* WINDOW_DISPLAY_NAME = "Cubey spinning thing";
     static constexpr const char* AUDIO_FILE = "funkytown.mp3";
-    static constexpr const char* PEAK_MODEL = "models/cubey.obj";
+    static constexpr const char* PEAK_MODEL = "models/backpack.obj";
 };
 
 class Shader;

@@ -87,9 +87,4 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
-  <ItemGroup>
-    <Object Include="models\cubey.obj">
-      <Filter>models</Filter>
-    </Object>
-  </ItemGroup>
 </Project>

@@ -2,9 +2,9 @@
 
 Just a project to learn about OpenGL.
 
-Currently displays a window, with figure that consisting of piramid on top of cube. 
+Currently displays a window, with figure of backpack (mangled textures). 
 
-![Figure](figure.jpg)
+![Figure](current.png)
 
 This figure is drawn in perspective using all the chapters of [OpenGL tutorial](https://learnopengl.com/Getting-started/Review) up to 'Model', with shaders written in separate files and code refactored to an OOP style. Figure is being read from object file. It also spins with funny music in the background
 
