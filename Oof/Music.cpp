@@ -22,6 +22,7 @@ Music::Music(const char* music_path)
 
 void Music::start() {
     if (initialized)
+        ma_engine_set_volume(&engine, 0.1);
         ma_sound_start(&sound);
 }
 

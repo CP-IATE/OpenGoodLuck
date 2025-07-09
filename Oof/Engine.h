@@ -5,7 +5,7 @@ class Engine
 {
 public:
 	int run();
-    void PollEvents(bool& running);
+    void PollEvents(bool& running);    
 
 private:
     static constexpr const char* VERTEX_SHADER_PATH = "./shaders/vertex.glsl";
@@ -18,3 +18,4 @@ private:
 class Shader;
 
 void rotateView(Shader& shader);
+void setupLight(Shader& lightingShader);
