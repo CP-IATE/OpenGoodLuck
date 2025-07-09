@@ -2,9 +2,9 @@
 
 Just a project to learn about OpenGL.
 
-Currently displays a window, with figure of backpack (mangled textures). 
+Currently displays a window with backpack (no lighting, plain colors). 
 
-![Figure](current.png)
+![Figure](figure.jpg)
 
 This figure is drawn in perspective using all the chapters of [OpenGL tutorial](https://learnopengl.com/Getting-started/Review) up to 'Model', with shaders written in separate files and code refactored to an OOP style. Figure is being read from object file. It also spins with funny music in the background
 

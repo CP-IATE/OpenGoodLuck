@@ -18,4 +18,3 @@ private:
 class Shader;
 
 void rotateView(Shader& shader);
-void setupLight(Shader& lightingShader);

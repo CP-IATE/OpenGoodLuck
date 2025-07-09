@@ -61,6 +61,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 
 void main()
 {
+    /* Uncomment when there is normal light in engine duh
     // properties
     vec3 norm = normalize(Normal);
     vec3 viewDir = normalize(viewPos - FragPos);
@@ -80,6 +81,9 @@ void main()
     result += CalcSpotLight(spotLight, norm, FragPos, viewDir);    
     
     FragColor = vec4(result, 1.0);
+    */
+    //For now just plain texture without lighting
+    FragColor = texture(material.texture_diffuse1, TexCoords);
 }
 
 // calculates the color when using a directional light.
